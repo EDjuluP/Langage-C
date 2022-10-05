@@ -10,7 +10,6 @@ int main(int argc, char ** argv)
 {
 	/////////////// EXO 1
 
-	
 	char str[100], rev[100];
 	int t = 0, j = 0, i;
 
@@ -27,13 +26,21 @@ int main(int argc, char ** argv)
 	}
 
 	printf("Le mot inverse de %s est : %s", str, rev);
+
+			for (k = 0; k <= strlen(chaine1) - 1; k++)
+		{
+			if (chaine1[k] != c)
+			{
+				v = 1;
+			}
+		}
 	
 
 	/////////////// EXO 2
 
 	
 	char chaine1[100], c;
-	int i, j = 0;
+	int i, j = 0, k, v;
 
 	printf("Rentrez votre chaine de caracteres :\n");
 	gets_s(chaine1);
@@ -41,8 +48,24 @@ int main(int argc, char ** argv)
 	printf("Rentrez le caractere que vous cherchez :\n");
 	scanf("%c", &c);
 
-	for (i = strlen(chaine1) - 1; i >= 0; i--) //  strlen(chaine1) - 1 car le dernier caract�re vaut '\0'
+	for (i = strlen(chaine1) - 1; i >= 0; i--) //  strlen(chaine1) - 1 car le dernier caractère vaut '\0'
 	{
+
+		for (k = 0; k <= strlen(chaine1) - 1; k++)
+		{
+			if (chaine1[k] != c)
+			{
+				v = 1;
+			}
+		
+		}
+
+		if (v == 1)
+		{
+			printf("Le caractere rechercher n est pas present dans la chaine !");
+			break;
+		}
+
 		j++;
 
 		if (chaine1[i] == c) // Si lettre = lettre occurence
@@ -50,6 +73,7 @@ int main(int argc, char ** argv)
 			printf("La premiere occurence de %c se trouve a la position %d a partir de la droite", c, j);
 			break;
 		}
+
 	}
 	
 
@@ -63,7 +87,7 @@ int main(int argc, char ** argv)
 
 	for (cMin = 'a'; cMin <= 'z'; cMin++)
 	{
-		//printf("%c", cMin);
+		printf("%c", cMin);
 		tabC[t] = cMin;
 		t++;
 	}
@@ -73,7 +97,7 @@ int main(int argc, char ** argv)
 	printf("Les lettres de l alphabet en majuscule : ");
 	for (cMaj = 'A'; cMaj <= 'Z'; cMaj++)
 	{
-		//printf("%c", cMaj);
+		printf("%c", cMaj);
 		tabC[t] = cMaj;
 		t++;
 	}
