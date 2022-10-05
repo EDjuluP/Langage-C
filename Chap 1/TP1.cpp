@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h> // for exit and random
+#include <math.h>
+#include <time.h>
 
 using namespace std;
 
@@ -114,27 +116,21 @@ int main(int argc, char ** argv)
 
 	
 	float moyenneClasse = 0, notes;
-	int compteurI = 0;
+	int compteurI = 1;
 
-	while (compteurI < 5)
+	srand(time(NULL));
+
+	while (compteurI < 30)
 	{
-		printf("Veuillez rentrer la note !\n");
-		scanf("%f", &notes);
+		notes = ((float)rand()/RAND_MAX*20);
 
-		while (notes > 20 || notes < 0)
-		{
-			printf("Veuillez saisir une note ENTRE 0 et 20 SVP!\n");
-			scanf("%f", &notes);
-		}
 
 		moyenneClasse += notes;
 		compteurI++;
 	}
 
-	moyenneClasse = moyenneClasse / compteurI;
-	printf("La moyenne de classe pour %d eleves est de %f/20", compteurI, moyenneClasse);
-
-	
+	moyenneClasse = moyenneClasse / 30;
+	printf("La moyenne de classe pour 30 eleves est de %f/20", moyenneClasse);
 
 	//// link random 1 to 20 -> https://yard.onl/sitelycee/cours/c/NombresAlatoires.html
 
