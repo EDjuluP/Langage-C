@@ -95,45 +95,74 @@ void transform(char *str); // D�claration prototype de la fonction transform
 
 ////////// EXO 4
 
-void lire(int *tab, int taille)
+void lire(int *tab, int width)
 {
+	int i;
 
+	for (i = 0; i < width; i++)
+	{
+		printf("Valeur de la case %d : ", i + 1);
+		scanf("%d", &tab[i]);
+	}
 }
-void lire(int *tab, int taille);
+void lire(int *tab, int width);
 
-void affiche(int *tab, int taille)
+int indice_min(int *tab, int width)
 {
+	int i;
+	int min = tab[0];
 
+	for (i = 0; i < width; i++)
+	{
+		if (min > tab[i])
+		{
+			min = tab[i];
+		}
+	}
+
+	return min;
 }
-void affiche(int *tab, int taille);
+int indice_min(int *tab, int width);
 
-int indice_min(int *tab, int taille) 
+void trier(int *tab, int width, int indice_min)
 {
+	int i, j, temp;
+	indice_min = tab[0];
 
+	for (i = 0; i < width; i++)
+	{
+		for (j = i + 1; j < width; j++)
+		{
+			if (tab[i] > tab[j])
+			{
+				temp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = temp;
+			}
+		}
+	}
 }
-int indice_min(int *tab, int taille);
+void trier(int *tab, int width, int indice_min);
 
-void trier(int *tab, int taille)
+void affiche(int *tab, int width)
 {
+	int i;
 
+	for (i = 0; i < width; i++)
+	{
+		printf("%d ", tab[i]);
+	}
 }
-void trier(int *tab, int taille);
-
-void affiche(int *tab, int taille)
-{
-
-}
-void affiche(int *tab, int taille);
+void affiche(int *tab, int width);
 
 int main(int argc, char ** argv)
 {
 	////////// EXO 1
-
+	
 	int nbEntier;
 
 	printf("Veuillez rentrer un nombre entier\n");
 	scanf("%d", &nbEntier);
-
 
 	if (multipleDeux(nbEntier) == 0)
 	{
@@ -174,9 +203,9 @@ int main(int argc, char ** argv)
 	{
 		printf("%c", pwd[i]); // Renvoie le mdp
 	}
-
+	
 	////////// EXO 3
-
+	
 	char str[100];
 
 	printf("Rentrer la chaine que vous souhaitez\n");
@@ -187,6 +216,28 @@ int main(int argc, char ** argv)
 	printf("La chaine modifier donne : %s", str);
 
 	////////// EXO 4
+
+	int tab[20], width, min;
+
+	printf("Rentrer le nombres d elements du tableau (max 20 et entier)\n");
+	scanf("%d", &width);
+
+	while (width > 20)
+	{
+		printf("ERREUR : Nombres d elements du tableau (max 20 et entier)\n");
+		scanf("%d", &width);
+	}
+
+	lire(tab, width);
+	printf("\nLes valeurs du tableau on etait saisis !\n");
+
+	min = indice_min(tab, width);
+	printf("La valeur minimum du tableau est : %d\n", min);
+
+	trier(tab, width, min);
+
+	printf("Le tableau trier donne : ");
+	affiche(tab, width);
 
 	return 0;
 }
