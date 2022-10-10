@@ -158,11 +158,12 @@ void affiche(int *tab, int width);
 int main(int argc, char ** argv)
 {
 	////////// EXO 1
-	
+
 	int nbEntier;
 
 	printf("Veuillez rentrer un nombre entier\n");
 	scanf("%d", &nbEntier);
+
 
 	if (multipleDeux(nbEntier) == 0)
 	{
@@ -203,9 +204,9 @@ int main(int argc, char ** argv)
 	{
 		printf("%c", pwd[i]); // Renvoie le mdp
 	}
-	
+
 	////////// EXO 3
-	
+
 	char str[100];
 
 	printf("Rentrer la chaine que vous souhaitez\n");
@@ -214,6 +215,7 @@ int main(int argc, char ** argv)
 	transform(str);
 
 	printf("La chaine modifier donne : %s", str);
+	
 
 	////////// EXO 4
 
