@@ -11,11 +11,11 @@ int main(int argc, char ** argv)
 {
 	/////////////// EXO 1
 
-	/*
+	
 	float a, b, produit = 0;
 	int i;
 
-	printf("Veuillez rentrez deux nombres, afin d'avoir le produits d'eux même\n");
+	printf("Veuillez rentrez deux nombres, afin d'avoir le produits d'eux mï¿½me\n");
 	scanf("%f%f", &a, &b);
 
 	for (i = 1; i <= a; i++)
@@ -24,11 +24,11 @@ int main(int argc, char ** argv)
 	}
 
 	printf("Le produit des deux nombres que vous avez saisi est : %f", produit);
-	*/
+	
 
 	/////////////// EXO 2
 	
-	/*
+	
 	int a, b, c;
 
 	printf("Veuillez entrer 3 nombres entiers svp \n");
@@ -63,11 +63,11 @@ int main(int argc, char ** argv)
 	{
 		printf("%d < %d < %d", c, b, a);
 	}
-	*/
+	
 
 	/////////////// EXO 3
 
-	/*
+	
 	float price = 0;
 	int weight;
 
@@ -88,11 +88,11 @@ int main(int argc, char ** argv)
 	}
 
 	printf("Le tarif que vous aurez a paye sera de %.2f francs-suisse.", price);
-	*/
+	
 
 	/////////////// EXO 4
 
-	/*
+	
 	string x, sexe, fastFood, sport, sportName;
 	int age, nbCine, nbFastFood;
 
@@ -143,7 +143,7 @@ int main(int argc, char ** argv)
 		printf("Voulez vous refaire le questionnaire ?\n");
 		scanf("%s", &x);
 	}
-	*/
+	
 
 	/////////////// EXO 5
 
@@ -154,7 +154,7 @@ int main(int argc, char ** argv)
 		printf("Rentrez une valeur de x comprise entre 2 et 10\n");
 		scanf("%d", &x);
 
-		while (x < 2 || x > 10) 
+		while (x < 2 || x > 30) 
 		{
 			printf("Rentrez une valeur de x comprise entre 2 et 10\n");
 			scanf("%d", &x);
@@ -180,8 +180,7 @@ int main(int argc, char ** argv)
 			printf("\n");
 		}
 		
-		break;
-		//printf("\nVous vous recommencez ? (1 = oui et 0 = non)\n");
-		//scanf("%d", &again);
+		printf("\nVous vous recommencez ? (1 = oui et 0 = non)\n");
+		scanf("%d", &again);
 	}
 }
