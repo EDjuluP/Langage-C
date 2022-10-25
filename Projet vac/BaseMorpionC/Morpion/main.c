@@ -1,13 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "tictactoewindow.h"
-#include "tictactoehelper.h"
+#include "minmax.h"
 
 #include <stdio.h>
 
 int main(int argc, char ** argv)
 {
+
 	int grille[9];
+
 	int again, nbStart, positionX, positionY;
 
 	printf("Bienvenu au jeu du morpion - OXO (Version console)\n\n");
@@ -24,11 +26,9 @@ int main(int argc, char ** argv)
 		if (nbStart == 1) // Equivalent number 1
 		{
 			printf("Vous avez choisi 1 !\n\n");
-
-			initializeGameState(grille); // Initialize grid
-
-			char player1 = 'X', player2 = 'O'; // Symbol player 1 and 2
 			printf("Le Joueur 1 aura le symbole X et le joueur 2 le symbole O\n\n");
+
+			initializeGameState(grille);
 
 			do
 			{
@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
 					}
 				}
 
-				printf("\nTour actuel : Joueur 1\n\nRAPPEL : X = la colonne (donc 0 a 2 (3 colonnes)) et Y = la ligne (donc 0 a 2 (3 lignes)), exemple 11 = milieu\nRentrer la position de votre symbole (x y) : ");
+				printf("\nTour actuel : Joueur 1\n\nRAPPEL : X = la colonne (donc 0 a 2 (3 colonnes)) et Y = la ligne (donc 0 a 2 (3 lignes)), exemple 1 1 = milieu\nRentrer la position de votre symbole (x y) : ");
 				scanf("%d %d", &positionX, &positionY);
 
 				index = (positionY * 3) + positionX; // Formule tab 2 dimensions to 1 dimension
@@ -109,7 +109,7 @@ int main(int argc, char ** argv)
 					}
 				}
 
-				printf("\nTour actuel : Joueur 2\n\nRAPPEL : X = la colonne (donc 0 a 2 (3 colonnes)) et Y = la ligne (donc 0 a 2 (3 lignes)), exemple 11 = milieu\nRentrer la position de votre symbole (xy) : ");
+				printf("\nTour actuel : Joueur 2\n\nRAPPEL : X = la colonne (donc 0 a 2 (3 colonnes)) et Y = la ligne (donc 0 a 2 (3 lignes)), exemple 1 1 = milieu\nRentrer la position de votre symbole (xy) : ");
 				scanf("%d %d", &positionX, &positionY);
 
 				index = (positionY * 3) + positionX; // Formule tab 2 dimensions to 1 dimension
@@ -168,7 +168,109 @@ int main(int argc, char ** argv)
 			printf("Vous avez choisi 2 !\n\n");
 			printf("Bonne chance contre l'IA !\n\n");
 
+			printf("Le Joueur 1 aura le symbole X et l IA le symbole O\n\n");
+
 			initializeGameState(grille);
+
+			do
+			{
+				int nbPlayer = 1; // Player 1
+
+				// Show grid before turn Player 1
+				for (int i = 0; i < 9; i++)
+				{
+					if (grille[i] == 0)
+					{
+						printf("- ");
+					}
+					else if (grille[i] == 1)
+					{
+						printf("X ");
+					}
+					else if (grille[i] == -1)
+					{
+						printf("O ");
+					}
+
+					if (i == 2 || i == 5 || i == 8)
+					{
+						printf("\n");
+					}
+				}
+
+				printf("\nTour actuel : Joueur 1\n\nRAPPEL : X = la colonne (donc 0 a 2 (3 colonnes)) et Y = la ligne (donc 0 a 2 (3 lignes)), exemple 1 1 = milieu\nRentrer la position de votre symbole (x y) : ");
+				scanf("%d %d", &positionX, &positionY);
+
+				index = (positionY * 3) + positionX; // Formule tab 2 dimensions to 1 dimension
+
+				while (positionX > 2 || positionX < 0 || positionY > 2 || positionY < 0 || grille[index] != 0)
+				{
+					printf("Veuillez rentrer une valeur de X ou Y inferieur a 3 ou bien superieur ou egal a 0 et une case non jouee : ");
+					scanf("%d %d", &positionX, &positionY);
+
+					index = (positionY * 3) + positionX; // Formule tab 2 dimensions to 1 dimension
+				}
+
+				grille[index] = nbPlayer; // Stock
+
+				if (testGameEnd(grille) == 1)
+				{
+					printf("\nJoueur 1 Gagnant ! GG\n\n");
+					win = 1;
+					break;
+				}
+				else if (testGameEnd(grille) == -2)
+				{
+					printf("\nMatch nul ! Bien jouez a toi !\n\n");
+					null = 1;
+					break;
+				}
+
+
+				nbPlayer *= -1; // IA
+
+				printf("\n\nTour actuel : IA\n");
+
+				int cellToPlay = getBestAction(grille, nbPlayer);
+				grille[cellToPlay] = nbPlayer; // Stock
+
+				if (testGameEnd(grille) == -1)
+				{
+					printf("\nIA Gagnant ! GG\n\n");
+					win = 1;
+					break;
+				}
+				else if (testGameEnd(grille) == -2)
+				{
+					printf("\nMatch nul ! Bien jouez a toi !\n\n");
+					null = 1;
+					break;
+				}
+
+			} while (win != 1 || null != 1); // !Win or !null
+
+
+			// Show grid after win player or match null
+			for (int i = 0; i < 9; i++)
+			{
+				if (grille[i] == 0)
+				{
+					printf("- ");
+				}
+				else if (grille[i] == 1)
+				{
+					printf("X ");
+				}
+				else if (grille[i] == -1)
+				{
+					printf("O ");
+				}
+
+				if (i == 2 || i == 5 || i == 8)
+				{
+					printf("\n");
+				}
+			}
 		}
 		else if (nbStart == 3) // Equivalent number 3
 		{

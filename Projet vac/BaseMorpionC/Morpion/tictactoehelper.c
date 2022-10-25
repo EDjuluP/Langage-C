@@ -70,9 +70,13 @@ int testGameEnd(int * gameState)
 int * copyGameState(int * gameState)
 {
 	// We take space of a table with 9 integer
-	 int newGameState = (int*)malloc(9 * sizeof(int));
+	int *newGameState = malloc(sizeof(int[9]));
 
-	 newGameState = gameState;
+	// Put grid in new space
+	for (int i = 0; i < 9; i++)
+	{
+		newGameState[i] = gameState[i];
+	}
 
 	// We return copy of grid
 	return newGameState;
@@ -81,6 +85,5 @@ int * copyGameState(int * gameState)
 // Destroy grid
 void destroyGameState(int * gameState)
 {
-	// Supp space of grid
-	free(gameState);
+  	free(gameState);
 }

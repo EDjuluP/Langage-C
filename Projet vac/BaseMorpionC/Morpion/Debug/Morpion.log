@@ -1,3 +1,5 @@
 ﻿  main.c
-c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basemorpionc\morpion\main.c(184): warning C4013: 'getch' non défini(e) ; extern retournant int pris par défaut
+c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basemorpionc\morpion\main.c(31): warning C4013: 'initializeGameState' non défini(e) ; extern retournant int pris par défaut
+c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basemorpionc\morpion\main.c(74): warning C4013: 'testGameEnd' non défini(e) ; extern retournant int pris par défaut
+c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basemorpionc\morpion\main.c(286): warning C4013: 'getch' non défini(e) ; extern retournant int pris par défaut
   Morpion.vcxproj -> C:\Users\Quent\Documents\BTS SN\1ère année\Informatique\C\Projet vac\BaseMorpionC\Debug\Morpion.exe

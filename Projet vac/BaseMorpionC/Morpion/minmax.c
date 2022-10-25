@@ -227,7 +227,7 @@ int getBestAction(int * gameState, int playerTurn)
 		}
 	}
 
-	printf("There is %d equal possibilities\n", randomActionCount);
+	printf("There is %d equal possibilities\n\n", randomActionCount);
 	if(randomActionCount > 1)
 	{
 		if(randIsInitialized == 0)
