@@ -1,5 +1,3 @@
 ﻿  main.c
-c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basemorpionc\morpion\main.c(20): warning C4013: 'getch' non défini(e) ; extern retournant int pris par défaut
-c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basemorpionc\morpion\main.c(52): warning C4477: 'scanf' : la chaîne de format '%d' nécessite un argument de type 'int *', mais l'argument variadique 2 est de type 'int'
-c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basemorpionc\morpion\main.c(88): warning C4477: 'scanf' : la chaîne de format '%d' nécessite un argument de type 'int *', mais l'argument variadique 2 est de type 'int'
+c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basemorpionc\morpion\main.c(184): warning C4013: 'getch' non défini(e) ; extern retournant int pris par défaut
   Morpion.vcxproj -> C:\Users\Quent\Documents\BTS SN\1ère année\Informatique\C\Projet vac\BaseMorpionC\Debug\Morpion.exe
