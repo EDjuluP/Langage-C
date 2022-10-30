@@ -1,7 +1,1 @@
-﻿  dico.c
-c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basependuc\projet-pendu-base\dico.c(71): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
-  main.c
-c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basependuc\projet-pendu-base\main.c(68): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
-c:\users\quent\documents\bts sn\1ère année\informatique\c\projet vac\basependuc\projet-pendu-base\main.c(11): warning C4101: 'lettreSaisi' : variable locale non référencée
-  Génération de code en cours...
-  Projet-Pendu-Base.vcxproj -> C:\Users\Quent\Documents\BTS SN\1ère année\Informatique\C\Projet vac\BasePenduC\x64\Debug\Projet-Pendu-Base.exe
+﻿  Projet-Pendu-Base.vcxproj -> C:\Users\Quent\Documents\BTS SN\1ère année\Informatique\C\Projet vac\BasePenduC\x64\Debug\Projet-Pendu-Base.exe

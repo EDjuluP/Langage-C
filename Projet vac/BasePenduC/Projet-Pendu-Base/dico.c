@@ -31,10 +31,10 @@ int piocherMot(char * motPioche)
 	} while (caractereLu != EOF);
 
 	numMotChoisi = nombreAleatoire(nombreMots); // On pioche un mot au hasard
-	
+
 	if (numMotChoisi == 8)
 	{
-		 tempNum = 8;
+		tempNum = 8;
 	}
 
 	// On recommence à lire le fichier depuis le début. On s'arrête lorsqu'on est arrivés au bon mot

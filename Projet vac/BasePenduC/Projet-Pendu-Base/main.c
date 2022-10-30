@@ -22,11 +22,6 @@ int main(int argc, char ** argv)
 		scanf("%d", &numChoisi);
 	}
 
-	do // On vide le buffer du scanf pour éviter le saut 
-	{ 
-		c = getchar();
-	} while (c != EOF && c != '\n');
-
 	if (numChoisi == 1)
 	{
 		// Saisi du mot mystère
@@ -78,13 +73,9 @@ int main(int argc, char ** argv)
 	{
 		printf("\n\n\nIl vous reste %d coups a jouer", essais); // Afficher le nombres d'essais restant
 
-		do // On Re vide le buffer du scanf pour éviter le saut
-		{
-			c = getchar();
-		} while (c != EOF && c != '\n');
-
 		printf("\nProposez une lettre (En majuscule) : "); // Rentrer un caractere
-		scanf("%c", &charResearch);
+		scanf(" %c", &charResearch);
+
 
 		// On parcourt motSecret pour vérifier si la lettre proposée y est
 		for (i = 0; mot[i] != '\0'; i++)
@@ -122,7 +113,7 @@ int main(int argc, char ** argv)
 		for (i = 0; i < tailleMot; i++)
 		{
 			if (lettreTrouvee[i] == 0)
-			{	 
+			{
 
 				win = 0;
 			}

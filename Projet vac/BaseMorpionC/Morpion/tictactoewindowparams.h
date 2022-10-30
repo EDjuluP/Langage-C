@@ -2,7 +2,7 @@
 #define TICTACTOEWINDOWPARAMS_H
 
 // Window properties :
-#define WINDOW_TITLE "Tic tac toe"
+#define WINDOW_TITLE "Jeux du morpion"
 #define WINDOW_W 480	// Window width
 #define WINDOW_H 480	// Window height
 #define CELL_W (WINDOW_W / 3)
