@@ -7,6 +7,7 @@
 
 ////////// EXO 1
 
+/*
 int multipleDeux(int a)
 {
 	int b;
@@ -15,7 +16,7 @@ int multipleDeux(int a)
 
 	return b;
 }
-int multipleDeux(int a); // Dï¿½claration prototype de la fonction multipleDeux
+int multipleDeux(int a); // Déclaration prototype de la fonction multipleDeux
 
 int multipleTrois(int a)
 {	
@@ -40,10 +41,12 @@ int multipleTrois(int a)
 
 	return b;
 }
-int multipleTrois(int a); // Dï¿½claration prototype de la fonction multipleTrois
+int multipleTrois(int a); // Déclaration prototype de la fonction multipleTrois
+*/
 
 ////////// EXO 2
 
+/*
 void psswrd(char *pwd, int width)
 {
 	int i;
@@ -53,7 +56,7 @@ void psswrd(char *pwd, int width)
 
 		pwd[i] = _getch(); // Recupere la saisie dans notre chaine
 
-		if (pwd[i] == 13) // Si entrï¿½e
+		if (pwd[i] == 13) // Si entrée
 		{
 			break;
 		}
@@ -61,12 +64,14 @@ void psswrd(char *pwd, int width)
 		printf("*");
 	}
 
-	pwd[i] = '\0'; // Dï¿½finis la case actuelle comme la derniï¿½re de notre chaine
+	pwd[i] = '\0'; // Définis la case actuelle comme la dernière de notre chaine
 }
-void psswrd(char *password, int width); // Dï¿½claration prototype de la fonction psswrd
+void psswrd(char *password, int width); // Déclaration prototype de la fonction psswrd
+*/
 
 ////////// EXO 3
 
+/*
 void transform(char *str)
 {
 	int i, k = 0;
@@ -91,7 +96,8 @@ void transform(char *str)
 	}
 
 }
-void transform(char *str); // Dï¿½claration prototype de la fonction transform
+void transform(char *str); // Déclaration prototype de la fonction transform
+*/
 
 ////////// EXO 4
 
@@ -159,6 +165,7 @@ int main(int argc, char ** argv)
 {
 	////////// EXO 1
 
+	/*
 	int nbEntier;
 
 	printf("Veuillez rentrer un nombre entier\n");
@@ -188,9 +195,11 @@ int main(int argc, char ** argv)
 	{
 		printf("Le nombre %d n'est ni multiple de 3 et 6", nbEntier);
 	}
+	*/
 
 	////////// EXO 2
 	
+	/*
 	char pwd[30];
 	int i, width;
 
@@ -204,9 +213,11 @@ int main(int argc, char ** argv)
 	{
 		printf("%c", pwd[i]); // Renvoie le mdp
 	}
+	*/
 
 	////////// EXO 3
 
+	/*
 	char str[100];
 
 	printf("Rentrer la chaine que vous souhaitez\n");
@@ -215,7 +226,7 @@ int main(int argc, char ** argv)
 	transform(str);
 
 	printf("La chaine modifier donne : %s", str);
-	
+	*/
 
 	////////// EXO 4
 

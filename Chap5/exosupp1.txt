@@ -1,0 +1,2 @@
+Minuscule : abcdefghijklmnopqrstuvwxyz
+Majuscule : ABCDEFGHIJKLMNOPQRSTUVWXYZ

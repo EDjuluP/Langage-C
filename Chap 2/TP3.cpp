@@ -10,6 +10,7 @@ int main(int argc, char ** argv)
 {
 	/////////////// EXO 1
 
+	/*
 	char str[100], rev[100];
 	int t = 0, j = 0, i;
 
@@ -34,7 +35,7 @@ int main(int argc, char ** argv)
 				v = 1;
 			}
 		}
-	
+	*/
 
 	/////////////// EXO 2
 
@@ -48,7 +49,7 @@ int main(int argc, char ** argv)
 	printf("Rentrez le caractere que vous cherchez :\n");
 	scanf("%c", &c);
 
-	for (i = strlen(chaine1) - 1; i >= 0; i--) //  strlen(chaine1) - 1 car le dernier caractÃ¨re vaut '\0'
+	for (i = strlen(chaine1) - 1; i >= 0; i--) //  strlen(chaine1) - 1 car le dernier caractère vaut '\0'
 	{
 
 		for (k = 0; k <= strlen(chaine1) - 1; k++)
@@ -79,30 +80,30 @@ int main(int argc, char ** argv)
 
 	/////////////// EXO3
 
-	
+	/*
 	char chainCharacter[100] = "", tabC[52], cMin, cMaj;
 	int i, j = 0, t = 0, a, b, e = 0;
 
-	printf("Les lettres de l alphabet en minuscule : ");
+	//printf("Les lettres de l alphabet en minuscule : ");
 
 	for (cMin = 'a'; cMin <= 'z'; cMin++)
 	{
-		printf("%c", cMin);
+		//printf("%c", cMin);
 		tabC[t] = cMin;
 		t++;
 	}
 
-	printf("\n");
+	//printf("\n");
 
-	printf("Les lettres de l alphabet en majuscule : ");
+	//printf("Les lettres de l alphabet en majuscule : ");
 	for (cMaj = 'A'; cMaj <= 'Z'; cMaj++)
 	{
-		printf("%c", cMaj);
+		//printf("%c", cMaj);
 		tabC[t] = cMaj;
 		t++;
 	}
 
-	printf("\n");
+	//printf("\n");
 
 	printf("Mon tableau de l alphabet est : ");
 	for (a = 0; a < t; a++)
@@ -130,11 +131,11 @@ int main(int argc, char ** argv)
 	}
 
 	printf("\nLe nombre de lettre de l alphabet est de %d et d espaces dans votre chaine est de %d\n", j, e);
-	
+	*/
 
 	/////////////// EXO4
 
-	
+	/*
 	char chaine1[100], tMaj[26], cMaj;
 	int i, k, c = 0;
 
@@ -159,11 +160,11 @@ int main(int argc, char ** argv)
 	}
 
 	printf("Votre chaine sans majuscules donne : %s", chaine1);
-	
+	*/
 
 	/////////////// EXO5
 
-	
+	/*
 	char chaine2[100], res[100];
 	int i, j = 0;
 
@@ -182,7 +183,7 @@ int main(int argc, char ** argv)
 	res[j] = '\0';
 
 	printf("Votre chaine sans espaces donne : %s", res);
-	
+	*/
 
 	return 0;
 
