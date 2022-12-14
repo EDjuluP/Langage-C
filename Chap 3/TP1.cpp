@@ -7,6 +7,7 @@
 
 //////////// EXO 1
 
+/*
 int puissance(int x, int y)
 {
 	int r_puissance;
@@ -16,10 +17,13 @@ int puissance(int x, int y)
 	return r_puissance;
 }
 
-int puissance(int x, int y); // dï¿½claration-prototype de la fonction puissance
+int puissance(int x, int y); // déclaration-prototype de la fonction puissance
+
+*/
 
 //////////// EXO 2
 
+/*
 void affiche(int *t) // on prend la valeur du tableau
 {
 	int i;
@@ -30,9 +34,13 @@ void affiche(int *t) // on prend la valeur du tableau
 	}
 }
 
-void affiche(int *t); // dï¿½claration-prototype de la fonction affiche
+void affiche(int *t); // déclaration-prototype de la fonction affiche
+
+*/
 
 ////////// EXO 3
+
+/*
 
 /// MIN
 float min(float *tab)
@@ -50,7 +58,7 @@ float min(float *tab)
 
 	return min;
 }
-float min(float *tab); // dï¿½claration-prototype de la fonction min
+float min(float *tab); // déclaration-prototype de la fonction min
 
 /// MAX
 float max(float *tab)
@@ -68,10 +76,12 @@ float max(float *tab)
 
 	return max;
 }
-float max(float *tab); // dï¿½claration-prototype de la fonction max
+float max(float *tab); // déclaration-prototype de la fonction max
+*/
 
 ////////// EXO 4
 
+/*
 int euclide(int a, int b)
 {
 	int t;
@@ -85,40 +95,48 @@ int euclide(int a, int b)
 
 	return a;
 }
-int euclide(int a, int b); // dï¿½claration-prototype de la fonction euclide
+int euclide(int a, int b); // déclaration-prototype de la fonction euclide
+*/
 
 ////////// EXO 5
 
-unsigned int factoriel(unsigned int n)
+/*
+ unsigned int factoriel(unsigned int n)
 {
-	if (n!=1)
-	{
-		n *= factoriel(n - 1);
-	}
+	 if (n!=1)
+	 {
+		 n *= factoriel(n - 1);
+	 }
 
-	return n;
+	 return n;
 }
-unsigned int factoriel(unsigned int n); // dï¿½claration-prototype de la fonction factoriel
+ unsigned int factoriel(unsigned int n); // déclaration-prototype de la fonction factoriel
+ */
 
-////////// EXO 6
+ ////////// EXO 6
 
+/*
 void inverse(char *ch)
 {
 	int i;
 
-	printf("L inverse de votre texte est : ");
-	for (i = strlen(ch) - 1; i >= 0; i--)
+	for (int i = strlen(ch) - 1, j = 0; j < i; i--, j++)
 	{
-		printf("%c", ch[i]);
+		int tmp = ch[j];
+		ch[j] = ch[i];
+		ch[i] = tmp;
 	}
-}
-void inverse(char *ch); // dï¿½claration-prototype de la fonction void inverse
 
+	printf("L inverse de votre texte est : %s", ch);
+}
+void inverse(char *ch); // déclaration-prototype de la fonction void inverse
+*/
 
 int main(int argc, char ** argv)
 {
 	////////// EXO 1
-	
+
+	/*
 	int x, y, xpuissy;
 
 	printf("Rentrez la valeur de x :\n");
@@ -129,24 +147,30 @@ int main(int argc, char ** argv)
 	xpuissy = puissance(x, y);
 
 	printf("Ce que donne %d^%d = %d", x, y, xpuissy);
-	
+	*/
+
 	////////// EXO 2
-	
+
+	/*
 	int tab[100] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512};
 
 	affiche(tab);
-	
+	*/
+
 	////////// EXO 3
-	
+
+	/*
 	float liste[8] = { 1.6, -6.9, 9.67, 5.90, 345, -23.6, 78, 34.6 };
 
 	float a = min(liste);
 	float b = max(liste);
 
 	printf("Le minimum est %.2f et le maximum est %.2f", a, b);
+	*/
 
 	////////// EXO 4
-	
+
+	/*
 	int a, b, c;
 
 	printf("Rentrer la valeur de a\n");
@@ -158,9 +182,11 @@ int main(int argc, char ** argv)
 	c = euclide(a, b);
 
 	printf("Le PGCD de (a) %d et (b) %d = %d", a, b, c);
+	*/
 
 	////////// EXO 5
 
+	/*
 	unsigned int n, f;
 
 	printf("Rentrer la valeur de la factorielle que vous souhaitez\n");
@@ -179,16 +205,18 @@ int main(int argc, char ** argv)
 		f = factoriel(n);
 		printf("factoriel de %u != %u", n, f);
 	}
+	*/
 
 	////////// EXO 6
 
+	/*
 	char str[100];
 
 	printf("Rentrer votre chaine texte\n");
 	gets_s(str);
 
 	inverse(str);
-	
+	*/
 
 	return 0;
 }

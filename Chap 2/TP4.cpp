@@ -9,11 +9,12 @@ using namespace std;
 int main(int argc, char ** argv)
 {
 	/////////////// EXO 1
-	
+
+	/*
 	int tab1[40];
 	int i, t, c, k, o, a, b;
 
-	// Demande ï¿½ l'user la taille du tableau
+	// Demande à l'user la taille du tableau
 	printf("Saisir la taille du tableau (max 40 entier)\n");
 	scanf("%d", &t);
 
@@ -54,7 +55,7 @@ int main(int argc, char ** argv)
 		}
 	}
 
-	// Renvoyer ce que contient le tableau aprï¿½s le tris
+	// Renvoyer ce que contient le tableau après le tris
 	printf("\nLe tableau apres le tris renvoie : ");
 	for (o = 0; o < t; o++)
 	{
@@ -66,13 +67,13 @@ int main(int argc, char ** argv)
 
 	/////////////// EXO 2
 
-	/// Mï¿½thode choisie : tri par sï¿½lection
+	/// Méthode choisie : tri par sélection
 
-	// Dï¿½finition du tableau + Variables
+	// Définition du tableau + Variables
 	int tab[20];
 	int i, j, a, temp;
 
-	srand(time(NULL)); // Dï¿½finition sï¿½quence pseudo-alï¿½atoire
+	srand(time(NULL)); // Définition séquence pseudo-aléatoire
 
 	// Random des entiers dans le tableau
 	for (i = 0; i < 20; i++)

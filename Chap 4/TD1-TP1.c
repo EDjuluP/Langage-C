@@ -2,92 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
-//////// EXO 3 TD 1
-
-/*
-void saisie(int * val, int *nb)
-{
-	int i;
-	
-	for (i = 0; i < 20; i++)
-	{
-		printf("Veuillez saisir une valeur superieur a 0 ou bien 0 pour stopper cette saisi : ");
-		scanf("%d", &val[i]);
-
-		if (val[i] == 0)
-		{
-			break;
-		}
-	}
-
-	*nb = i;
-
-}
-
-void affiche(int * val, int nb)
-{
-	int i;
-
-	printf("\n");
-
-	for (i = 0; i < nb; i++)
-	{
-		printf("%d ", val[i]);
-	}
-
-	printf("\nLe nombre de valeurs qui ont etaient saisi est de : %d", i);
-}
-*/
-
-//////// EXO 4 TP 1
-
-/*
-void affiche(int *tab, int i, int j) // Affichage i = lignes et j = colonnes
-{
-
-}
-*/
-
-//////// EXO 5 TP 1
-
-
-/*
-void saisie(float *aa, float *bb, float *cc)
-{
-	printf("Saisir a : ");
-	scanf("%f", &aa);
-
-	printf("Saisir b : ");
-	scanf("%f", &bb);
-
-	printf("Saisir a : ");
-	scanf("%f", &cc);
-}
-
-float *calcul(float aa, float bb, float cc)
-{
-	float delta = (bb*bb) - 4 * aa * cc;
-
-	int nbSolutions = 0; // De base
-
-	if (delta == 0) // Si delta = 0
-	{
-		nbSolutions = 1;
-		float x = - bb / 2 * aa ;
-
-	}
-	else if (delta > 0) // Si delta est supérieur 0
-	{
-		nbSolutions = 2;
-
-		float x1 = -bb - sqrt(delta) / 2 * aa;
-		float x2 = -bb + sqrt(delta) / 2 * aa;
-	}
-}
-
-*/
+#include "functions.h"
 
 int main(int argc, char ** argv)
 {
@@ -105,15 +21,15 @@ int main(int argc, char ** argv)
 	/*
 	double *adr1, *adr2;
 
-	adr1 = (double*)malloc(sizeof(double)); // alloue case mémoire
+	adr1 = (double*)malloc(sizeof(double)); // alloue case mÃ©moire
 	adr2 = (double*)malloc(sizeof(double));
 
-	*adr1 = -45.78; // Pointe sur un réel
+	*adr1 = -45.78; // Pointe sur un rÃ©el
 	*adr2 = 678.89;
 
 	printf("%p, %p, %f, %f", &adr1, &adr2, *adr1, *adr2);
 
-	free(adr1); // libére case mémoire
+	free(adr1); // libÃ©re case mÃ©moire
 	free(adr2);
 	*/
 
@@ -154,10 +70,10 @@ int main(int argc, char ** argv)
 	//////// EXO 3 TP 1
 
 	/*
-	char *ptr = (char*)malloc(1000 * sizeof(char)); // Emplacer mémoire chaine
+	char *ptr = (char*)malloc(1000 * sizeof(char)); // Emplacer mÃ©moire chaine
 
 	printf("Saisir une chaine de caractere : ");
-	gets_s(ptr, 1000); // Saisir la chaîne
+	gets_s(ptr, 1000); // Saisir la chaÃ®ne
 
 	for (int i = 0; ptr[i] != '\0'; i++) // Tant que pas dernier caractere
 	{
@@ -201,11 +117,9 @@ int main(int argc, char ** argv)
 	float *stockVar;
 	printf("%d", &varfloat);
 
-	stockVar = (float*)malloc(sizeof(float)); // On reserve la place d'un reel
 	stockVar = &varfloat; // Affiche l'adresse de A
 	printf("\n%d", stockVar);
 
-	*stockVar = varfloat; // Affiche le contenu de A
 	printf("\n%.1f", *stockVar);
 	*/
 
@@ -243,5 +157,62 @@ int main(int argc, char ** argv)
 	}
 	*/
 	
+	///////// EXO1 SUPP
+	
+	/*
+	int a, b;
+
+	printf("Fonction qui swap des valeurs entre deux variable entieres grace a des pointeurs !\n");
+
+	printf("Rentrez la valeur de a : ");
+	scanf("%d", &a);
+
+	printf("Rentrez la valeur de b : ");
+	scanf("%d", &b);
+
+	printf("\na = %d et b = %d\n", a, b);
+
+	swap(&a, &b);
+
+	printf("Maintenant a = %d et b = %d", a, b);
+
+	*/
+
+	///////// EXO2 SUPP
+
+	/*
+	int tab[10] = { 1,2,3,4,5,6,7,8,9,10 };
+	int min = 0, max = 0;
+
+	minmax(tab, 10, &min, &max);
+
+	printf("Maximum = %d et Minimum = %d", max, min);
+	*/
+
+	///////// EXO3 SUPP
+
+	/*
+	char str[50], charResearch = 'A';
+	int nbOccurences;
+
+	printf("Saisir une chaine de caractere svp ;)\n");
+	fgets(str, 50, stdin);
+
+	nbOccurences = occurence(str, charResearch);
+	printf("\nLe nombre d'occurence de A ou a est de %d", nbOccurences);
+
+	*/
+	
+	//////// EXO 4 SUPP
+
+	char str2[50], *copychar; 
+
+	printf("Saisir une chaine de caracteres svp ;)\n");
+	fgets(str2, 50, stdin);
+
+	copy(str2, &copychar);
+
+	printf("%s", copychar);
+ 
 	return 0;
 }

@@ -8,7 +8,7 @@ int main(int argc, char ** argv)
 {
 	/////////////// EXO 1
 
-	
+	/*
 	int i, j, row, col;
 	float t[3][4];
 	float somme = 0;
@@ -39,7 +39,7 @@ int main(int argc, char ** argv)
 
 	printf("La somme des elements de votre tableau est = %f", somme);
 	return 0;
-	
+	*/
 
 	/////////////// EXO 2
 
