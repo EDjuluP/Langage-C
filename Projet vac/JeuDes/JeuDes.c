@@ -8,7 +8,7 @@
 
 int main(int argc, char ** argv)
 {
-	Players * Joueur = NULL;
+	Players * joueursDes = NULL; // Tableau de joueurs
 
 	printf("------- Bienvenue au jeu des 10000 ! -------\n\n");
 	Sleep(3000);
@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
 		{
 			system("CLS");
 
-			saisieNomsJoueurs(&Joueur);
+			saisieNomsJoueurs(&joueursDes);
 		}
 		else if (nbSaisi == 2)
 		{
@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
 		}
 
 		nbAgain = 0;
-		printf("Voulez-vous revenir au menu ou bien quitter ?  (Oui = 1 et Non = 0) : ");
+		printf("\nVoulez-vous revenir au menu ou bien quitter ?  (Oui = 1 et Non = 0) : ");
 		scanf("%d", &nbAgain);
 
 		printf("\n\n");
