@@ -9,3 +9,8 @@ typedef struct
 } Players;
 
 void saisieNomsJoueurs(Players ** Joueur);
+
+void jeu(Players ** Joueur)
+{
+
+}

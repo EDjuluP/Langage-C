@@ -34,6 +34,9 @@ int main(int argc, char ** argv)
 			system("CLS");
 
 			saisieNomsJoueurs(&joueursDes);
+
+
+
 		}
 		else if (nbSaisi == 2)
 		{

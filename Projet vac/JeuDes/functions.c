@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,12 +13,10 @@ void saisieNomsJoueurs(Players ** Joueur)
 
 	do
 	{
-
 		if (nbPlayer < 2) // SI IL Y A PAS DEUX JOUEURS
 		{
-			while (nbPlayer < 2)
+			while (nbPlayer < 2) // Tant que y'a pas deux joueurs
 			{
-
 				printf("Rentrez un nom (Vous serez le joueur numero %d) : ", nbPlayer + 1);
 				scanf("%s", nom);
 
@@ -36,11 +34,12 @@ void saisieNomsJoueurs(Players ** Joueur)
 					}
 				}
 
+				// Si il existe
 				if (playerPresent == 1) // Si present alors on re-saisi
 				{
 					printf("\nCe nom de joueur est deja present ! Merci de choisir un autre SVP !\n");
 				}
-				else
+				else // Si il existe pas
 				{
 					nbPlayer++; // on ajoute 1 au nombre de joueurs
 
@@ -54,20 +53,43 @@ void saisieNomsJoueurs(Players ** Joueur)
 					}
 
 					strcpy((*Joueur)[nbPlayer - 1].name, nom); // On ajoute le nom du Joueur
-					(*Joueur)[nbPlayer - 1].numJoueur = nbPlayer; // Definis le numéro du joueur
+					(*Joueur)[nbPlayer - 1].numJoueur = nbPlayer; // Definis le numï¿½ro du joueur
 					(*Joueur)[nbPlayer - 1].points = 0; // On lui met sont nombres de point a zero
+
+					printf("\nJoueur ajouter !\n");
 				}
 			}
 		}
 		else
 		{
-				printf("TEST 1234");
+			printf("Rentrez un nom (Vous serez le joueur numero %d) : ", nbPlayer + 1);
+			scanf("%s", nom);
+
+			// ON VA VERIFER QUIL EXISTE OU PAS
+			int playerPresent = 0;
+			int indexPlayer = 0;
+
+			for (int i = 0; i < nbPlayer; i++) // On parcour notre tableau de joueur
+			{
+				if (strcmp(nom, (*Joueur)[i].name) == 0)
+				{
+					playerPresent = 1;
+					indexPlayer = i;
+					break;
+				}
+			}
+
+			// Si il existe
+			while (playerPresent == 1)
+			{
+				printf("\nCe nom de joueur est deja present ! Merci de choisir un autre SVP !\n");
+
 				printf("Rentrez un nom (Vous serez le joueur numero %d) : ", nbPlayer + 1);
 				scanf("%s", nom);
 
 				// ON VA VERIFER QUIL EXISTE OU PAS
-				int playerPresent = 0;
-				int indexPlayer = 0;
+				playerPresent = 0;
+				indexPlayer = 0;
 
 				for (int i = 0; i < nbPlayer; i++) // On parcour notre tableau de joueur
 				{
@@ -78,47 +100,27 @@ void saisieNomsJoueurs(Players ** Joueur)
 						break;
 					}
 				}
+			}
 
-				while (playerPresent == 1)
+			// Si il existe pas
+			if (playerPresent == 0)
+			{
+				nbPlayer++; // on ajoute 1 au nombre de joueurs
+
+				Players * oldMem = (*Joueur); // On fait une copie de l'ancier
+				(*Joueur) = malloc(nbPlayer * sizeof(Players)); // On agrandi le tableau
+
+				if (oldMem != NULL)
 				{
-					printf("\nCe nom de joueur est deja present ! Merci de choisir un autre SVP !\n");
-
-					printf("Rentrez un nom (Vous serez le joueur numero %d) : ", nbPlayer + 1);
-					scanf("%s", nom);
-
-					// ON VA VERIFER QUIL EXISTE OU PAS
-					int playerPresent = 0;
-					int indexPlayer = 0;
-
-					for (int i = 0; i < nbPlayer; i++) // On parcour notre tableau de joueur
-					{
-						if (strcmp(nom, (*Joueur)[i].name) == 0)
-						{
-							playerPresent = 1;
-							indexPlayer = i;
-							break;
-						}
-					}
-
+					memcpy((*Joueur), oldMem, (nbPlayer - 1) * sizeof(Players)); // On copie l'ancien dans le nouveau
+					free(oldMem); // on supprime l'ancien
 				}
 
-				if
-				{
-					nbPlayer++; // on ajoute 1 au nombre de joueurs
+				strcpy((*Joueur)[nbPlayer - 1].name, nom); // On ajoute le nom du Joueur
+				(*Joueur)[nbPlayer - 1].numJoueur = nbPlayer; // Definis le numï¿½ro du joueur
+				(*Joueur)[nbPlayer - 1].points = 0; // On lui met sont nombres de point a zero
 
-					Players * oldMem = (*Joueur); // On fait une copie de l'ancier
-					(*Joueur) = malloc(nbPlayer * sizeof(Players)); // On agrandi le tableau
-
-					if (oldMem != NULL)
-					{
-						memcpy((*Joueur), oldMem, (nbPlayer - 1) * sizeof(Players)); // On copie l'ancien dans le nouveau
-						free(oldMem); // on supprime l'ancien
-					}
-
-					strcpy((*Joueur)[nbPlayer - 1].name, nom); // On ajoute le nom du Joueur
-					(*Joueur)[nbPlayer - 1].numJoueur = nbPlayer; // Definis le numéro du joueur
-					(*Joueur)[nbPlayer - 1].points = 0; // On lui met sont nombres de point a zero
-				}
+				printf("\nJoueur ajouter !\n");
 			}
 		}
 
@@ -136,3 +138,4 @@ void saisieNomsJoueurs(Players ** Joueur)
 
 	} while (nbPlayer < 6 || nbChoose != 0);
 }
+
