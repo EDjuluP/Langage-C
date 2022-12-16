@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,6 +26,7 @@ int main(int argc, char ** argv)
 		printf("1 - Lancer le jeu des 10000\n");
 		printf("2 - Voir les regles du jeu des 10000\n");
 
+		printf("\nVotre choix : ");
 		scanf("%d", &nbSaisi);
 
 		// Selon notre choix on fait
@@ -33,7 +34,7 @@ int main(int argc, char ** argv)
 		{
 			system("CLS");
 
-			// Saisi Joueur et récupération du nombre de joueurs
+			// Saisi Joueur et rï¿½cupï¿½ration du nombre de joueurs
 			int nbJoueur = saisieNomsJoueurs(&joueursDes);
 
 			// On va lancer le jeu et jouer
@@ -42,7 +43,7 @@ int main(int argc, char ** argv)
 			// On supprime le tableau joueurs
 			free(joueursDes);
 		}
-		else if (nbSaisi == 2) // Affichage des régles et but du jeu
+		else if (nbSaisi == 2) // Affichage des rï¿½gles et but du jeu
 		{
 			system("CLS");
 

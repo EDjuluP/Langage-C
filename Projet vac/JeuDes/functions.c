@@ -155,7 +155,7 @@ int saisieNomsJoueurs(Players ** Joueur)
 
 void Jeu(Players ** Joueur, int nbJoueur)
 {
-	int noWinner = 1;
+	int winner = 0;
 	srand(time(NULL));
 
 	do
@@ -165,14 +165,14 @@ void Jeu(Players ** Joueur, int nbJoueur)
 		{
 			printf("\nTour en en cours : %s\n", (*Joueur)[i].name); // On affiche le nom du joueur
 			printf("Pour lancer les des appuyer sur la touche *\n");
-			
+
 			while (_getch() != 42) // Tant qu'il a pas appuyer sur la touche *
 			{
 				printf("ERREUR : Veuillez appuyer sur la touche * SVP\n");
 			}
 
 			int des[6]; // On fait un tableau pour stocker les valeurs des 6 dés 
-			
+
 			printf("\nVotre tirage donne : ");
 			for (int j = 0; j < 6; j++) // On tire les valeurs des 6 dés
 			{
@@ -186,7 +186,7 @@ void Jeu(Players ** Joueur, int nbJoueur)
 
 			if (score == 1) // Si un joueur à gagner
 			{
-				noWinner = 1;
+				winner = 1;
 				break;
 			}
 			else
@@ -203,17 +203,7 @@ void Jeu(Players ** Joueur, int nbJoueur)
 		// Affichage des scores à la fin du tour
 		// affichageScore(&Joueur);
 
-	} while (noWinner == 1);
-}
-
-void check3TimeValue(int valueDe, int valueComp, int * numDe, int * scoreJoueur)
-{
-	if (valueDe == valueComp && *numDe == 3 * valueDe)
-	{
-		*scoreJoueur += 100 * valueDe; // 100 fois la valeur du dé
-		printf("\n3 - Score : %d\n", *scoreJoueur);
-		*numDe = 0;
-	}
+	} while (winner != 1);
 }
 
 int calculPoints(Players ** Joueur, int * tab)
@@ -226,7 +216,7 @@ int calculPoints(Players ** Joueur, int * tab)
 
 	// On va faire un tableau de 6 cases (num 1 à 6 du dé)
 	// Quand un chiffre est trouvé il va être additionné pour les combinaisons
-	int numDes[6] = {0,0,0,0,0,0};
+	int numDes[6] = { 0,0,0,0,0,0 };
 
 	for (int i = 0; i < 6; i++) // On va partir les valeurs et comparer
 	{
@@ -235,7 +225,6 @@ int calculPoints(Players ** Joueur, int * tab)
 		{
 			numDes[0] += 1; // On ajoute 1 au tableau colonne 1
 			scoreJoueur += 100;
-			printf("\n-1 Score : %d\n", scoreJoueur);
 		}
 		else if (tab[i] == 2)
 		{
@@ -253,58 +242,60 @@ int calculPoints(Players ** Joueur, int * tab)
 		{
 			numDes[4] += 5; // On ajoute 5 au tableau colonne 5
 			scoreJoueur += 50;
-			printf("\n1 -Score : %d\n", scoreJoueur);
 		}
 		else if (tab[i] == 6)
 		{
 			numDes[5] += 6; // On ajoute 6 au tableau colonne 6
 		}
-
-
-		
-	}
-
-	for (int z = 0; z < 6; z++)
-	{
-		printf("\nIndex du numero %d : %d\n", z+1, numDes[z]);
 	}
 
 	/// Pour Les combinaisons identiques 6 fois
 	if (numDes[0] == 6) // Si 6 dés sont égales à 1 (1+1+1+1+1+1)
 	{
 		scoreJoueur = 1; // Win
-		printf("\n4 - Score : %d\n", scoreJoueur);
 	}
 	else if (numDes[1] == 12 || numDes[2] == 18 || numDes[3] == 24 || numDes[4] == 30 || numDes[5] == 36) // Si 6 dés sont égales identiques (n+n+n+n+n+n)
 	{
 		scoreJoueur += 1000 * tab[0]; // 1000 fois la valeur du dé
-		printf("\n5 - Score : %d\n", scoreJoueur);
 	}
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 6; i++) // on re parcour le tableau des valeurs du dés après Les combinaisons identiques 6 fois
 	{
-
 		/// Pour Les combinaisons identiques 3 fois
-		if (numDes[0] == 3) // Si 3 dés sont égales à 1 (1+1+1)
+		if (tab[i] == 1 && numDes[0] == 3 || numDes[0] == 4 || numDes[0] == 5) // Si 3 ou plus de dés sont égales à 1 (1+1+1+1+1 max)
 		{
-			scoreJoueur += 1000;
-			printf("\n2 -Score : %d\n", scoreJoueur);
+			scoreJoueur += 1000; // 1000 points
+			numDes[0] = 0; // On met à 0 pour par qui retombe dessus
 		}
-		else if (numDes[1] == 6 || numDes[2] == 9 || numDes[3] == 12 || numDes[4] == 15 || numDes[5] == 18) // Si 3 dés identiques (n+n+n)
+		else // Si 3 dés identiques (n+n+n+n+n max)
 		{
-			for (int j = 1; j < 6; j++)
-			{
-				check3TimeValue(tab[i], j + 1, &numDes[j], &scoreJoueur);
-			}
-			/*
-			if (tab[i] == 1 && numDes[1] == 6)
+			if (tab[i] == 2 && numDes[1] == 6 || numDes[1] == 8 || numDes[1] == 10) // Si ma valeur de dés est x et qu'on l'a déjà eu trois fois ou plus
 			{
 				scoreJoueur += 100 * tab[i]; // 100 fois la valeur du dé
-				printf("\n3 - Score : %d\n", scoreJoueur);
-				numDes[1] = 0;
+				numDes[1] = 0; // On met à 0 pour par qui retombe dessus
 			}
-			*/
+			else if (tab[i] == 3 && numDes[2] == 9 || numDes[2] == 12 || numDes[2] == 15)
+			{
+				scoreJoueur += 100 * tab[i]; 
+				numDes[2] = 0;
+			}
+			else if (tab[i] == 4 && numDes[3] == 12 || numDes[3] == 16 || numDes[3] == 20)
+			{
+				scoreJoueur += 100 * tab[i];
+				numDes[3] = 0;
+			}
+			else if (tab[i] == 5 && numDes[4] == 15 || numDes[4] == 20 || numDes[4] == 25)
+			{
+				scoreJoueur += 100 * tab[i];
+				numDes[4] = 0;
+			}
+			else if (tab[i] == 6 && numDes[5] == 18 || numDes[5] == 24 || numDes[5] == 30)
+			{
+				scoreJoueur += 100 * tab[i];
+				numDes[5] = 0;
+			}
 		}
 	}
-	return scoreJoueur;
+
+	return scoreJoueur; // Retourner le score du joueur
 }
