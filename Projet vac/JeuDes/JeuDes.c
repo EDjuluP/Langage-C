@@ -33,12 +33,16 @@ int main(int argc, char ** argv)
 		{
 			system("CLS");
 
-			saisieNomsJoueurs(&joueursDes);
+			// Saisi Joueur et récupération du nombre de joueurs
+			int nbJoueur = saisieNomsJoueurs(&joueursDes);
 
+			// On va lancer le jeu et jouer
+			Jeu(&joueursDes, nbJoueur);
 
-
+			// On supprime le tableau joueurs
+			free(joueursDes);
 		}
-		else if (nbSaisi == 2)
+		else if (nbSaisi == 2) // Affichage des régles et but du jeu
 		{
 			system("CLS");
 

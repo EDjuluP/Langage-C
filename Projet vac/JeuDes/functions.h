@@ -8,9 +8,7 @@ typedef struct
 
 } Players;
 
-void saisieNomsJoueurs(Players ** Joueur);
-
-void jeu(Players ** Joueur)
-{
-
-}
+int saisieNomsJoueurs(Players ** Joueur);
+void Jeu(Players ** Joueur, int nbJoueur);
+int calculPoints(Players ** Joueur, int * tab);
+//void affichageScore(Players * Joueur);
