@@ -1,4 +1,8 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+﻿///////////// BY POLLET Quentin ///////////
+//////////// Student at La Providence in Amiens (France)/////////
+//////////// Last Release Date : 17/12/2022 - 12:22 AM /////////
+
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -125,13 +129,29 @@ int saisieNomsJoueurs(Players ** Joueur)
 			}
 		}
 
-		printf("Rajouter un joueur ? (Oui = 1 et Non = 0): "); // Si l'utilisateur souhaite rajouter un joueur
-		scanf("%d", &nbChoose);
+		if (nbPlayer != 6)
+		{
+			printf("Rajouter un joueur ? (Oui = 1 et Non = 0): "); // Si l'utilisateur souhaite rajouter un joueur
+			scanf("%d", &nbChoose);
+		}
+		else
+		{
+			printf("Bonne partie a vous tous ! (nombre de joueur max atteint)");
+			break;
+		}
 
 		while (nbChoose != 1 && nbChoose != 0) // Si l'utilisateur rentre pas 1 ou 0
 		{
+			if (nbPlayer != 6)
+			{
 			printf("Rajouter un joueur [1 ou 0 SVP !!!] ? (Oui = 1 et Non = 0): ");
 			scanf("%d", &nbChoose);
+			}
+			else
+			{
+				printf("Bonne partie a vous tous ! (nombre de joueur max atteint)");
+				break;
+			}
 		}
 
 		if (nbChoose == 1)
@@ -152,7 +172,6 @@ int saisieNomsJoueurs(Players ** Joueur)
 	return nbPlayer;
 }
 
-
 void Jeu(Players ** Joueur, int nbJoueur)
 {
 	int winner = 0;
@@ -163,7 +182,7 @@ void Jeu(Players ** Joueur, int nbJoueur)
 		// On fait jouer le joueur en affichant nom
 		for (int i = 0; i < nbJoueur; i++)
 		{
-			printf("\nTour en en cours : %s\n", (*Joueur)[i].name); // On affiche le nom du joueur
+			printf("\n\nTour en en cours : %s\n", (*Joueur)[i].name); // On affiche le nom du joueur
 			printf("Pour lancer les des appuyer sur la touche *\n");
 
 			while (_getch() != 42) // Tant qu'il a pas appuyer sur la touche *
@@ -182,26 +201,58 @@ void Jeu(Players ** Joueur, int nbJoueur)
 			}
 
 			// On calcul alors les points du joueur en question
-			int score = calculPoints(Joueur, des);
+			int score = calculPoints(&Joueur, des);
+
+			if (score == -1000) // Si il perd 1k points
+			{
+				// On va verifier qu'il n'est pas déjà à 0 points
+				if ((*Joueur)[i].points != 0)
+				{
+					int result = (*Joueur)[i].points + score; // On fait la soustraction des 1k points
+
+					if (result >= 0)
+					{
+						(*Joueur)[i].points -= 1000;
+					}
+					else 
+					{
+						(*Joueur)[i].points = 0;
+					}
+				}
+			}
+			else
+			{
+				(*Joueur)[i].points += score; // On lui met sont nombres de points
+			}
 
 			if (score == 1) // Si un joueur à gagner
 			{
 				winner = 1;
+				(*Joueur)[i].points += 99999; // Son score sera égal à l'infini (99999)
+
+				printf("Vous avez gagner !!!");
 				break;
+			}
+			else if ((*Joueur)[i].points >= 10000) // Si score supérieur ou égale à 10k pooints 
+			{
+				winner = 1;
+				printf("\nVotre score est sur ce tour est : %d points", score);
 			}
 			else
 			{
-				printf("Vous avez un score : %d points", score);
+				if (score == -1000)
+				{
+					printf("\nVotre score est sur ce tour est : 0 point (Vous perdez 1000 points mais votre score ne peut pas etre inferieur a 0 !)");
+				}
+				else
+				{
+					printf("\nVotre score est sur ce tour est : %d points", score);
+				}
 			}
-
-			// Affichage du score après le calcul des points
-			// affichageScore(&Joueur);
-
-			printf("\nVotre score est donc de : %d", score);
 		}
 
 		// Affichage des scores à la fin du tour
-		// affichageScore(&Joueur);
+		affichageScore(*Joueur, nbJoueur, winner);
 
 	} while (winner != 1);
 }
@@ -297,5 +348,51 @@ int calculPoints(Players ** Joueur, int * tab)
 		}
 	}
 
+	if (scoreJoueur == 0) // Si il a aucune combinaison ou aucun point, il perd 1k points
+	{
+		scoreJoueur = -1000;
+	}
+
 	return scoreJoueur; // Retourner le score du joueur
 }
+
+void affichageScore(Players * Joueurs, int nbJoueurs, int winner)
+{
+	if (winner == 1) // Si il y a un gagnant
+	{
+		int scoreWinner = 0, indexWinner = 0; // Pour trier le tableau des scores dans l'ordre croissant
+		int *finalScores; // pointeur pour allocation dynamique
+		finalScores = malloc(nbJoueurs * sizeof(int)); // On créer un tableau d'une taille du nombres de joueurs
+
+		for (int j = 0; j < nbJoueurs ; j++) // Pour avoir le numéro du joueur ayant le plus de point donc le gagnant
+		{
+			if (Joueurs[j].points > scoreWinner) // On cherche le score max et à son index
+			{
+				scoreWinner = Joueurs[j].points;
+				indexWinner = j;
+			}
+		}
+
+		// Ensuite on n'annonce le nom du gagnant avec son nombre de points
+		printf("\n\nLe gagnant de la partie est %s avec un total : %d points !!!\n", Joueurs[indexWinner].name, Joueurs[indexWinner].points);
+
+		// Et on affiche le classement final
+		for (int i = 0; i < nbJoueurs; i++)
+		{
+			printf("\n%s -> Score : %d\n", Joueurs[i].name, Joueurs[i].points);
+		}
+		
+	}
+	else
+	{
+		printf("\n\nVoici les scores actuel :\n");
+		for (int i = 0; i < nbJoueurs; i++)
+		{
+			printf("\n%s -> Score : %d\n", Joueurs[i].name, Joueurs[i].points);
+		}
+	}
+}
+
+///////////// BY POLLET Quentin ///////////
+//////////// Student at La Providence in Amiens (France)/////////
+//////////// Last Release Date : 17/12/2022 - 12:22 AM /////////
