@@ -1,398 +1,307 @@
-﻿///////////// BY POLLET Quentin ///////////
-//////////// Student at La Providence in Amiens (France)/////////
-//////////// Last Release Date : 17/12/2022 - 12:22 AM /////////
-
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <Windows.h>
-#include <time.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+#include<time.h>
 
-#include "functions.h"
+#include "fonctions.h"
 
-int saisieNomsJoueurs(Players ** Joueur)
+int saisieJoueurs(Joueurs ** TabJoueurs)
 {
-	char nom[50];
-	int nbPlayer = 0, nbChoose;
+	int nbJoueurs;
+	int Joueurs;
+	// Saisie des joueurs
+	printf("Entrez le nombre de joueurs entre 2 et 6 :\n\n");
+	scanf("%d", &nbJoueurs);
 
-	do
+	// La boucle se repète tant que l'utilisateur saisit un chiffre inferieur a 2 ou superieur a 6
+	while (nbJoueurs < 2 && nbJoueurs > 6)
 	{
-		if (nbPlayer < 2) // SI IL Y A PAS DEUX JOUEURS
+		printf("Entrez le nombre de joueurs entre 2 et 6 :\n\n");
+		scanf("%d", &nbJoueurs);
+	}
+
+	*TabJoueurs = malloc(nbJoueurs * sizeof(Joueurs)); // On crée le tableau des joueurs
+
+	for (int i = 0; i < nbJoueurs; i++)
+	{
+		char nom[20];
+		// Demander aux joueurs d'entrer leurs noms
+		printf("Entrez le nom du joueur %d:  ", i + 1);
+		scanf("%s", nom);
+
+		int joueurPresent = 0;
+		
+		
+		for (int i = 0; i < nbJoueurs; i++) // On parcourt notre tableau de joueurs
 		{
-			while (nbPlayer < 2) // Tant que y'a pas deux joueurs
+			if (strcmp(nom,  (*TabJoueurs)[i].nom) == 0)
 			{
-				printf("Rentrez un nom (Vous serez le joueur numero %d) : ", nbPlayer + 1);
-				scanf("%s", nom);
-
-				// ON VA VERIFER QUIL EXISTE OU PAS
-				int playerPresent = 0;
-				int indexPlayer = 0;
-
-				for (int i = 0; i < nbPlayer; i++) // On parcour notre tableau de joueur
-				{
-					if (strcmp(nom, (*Joueur)[i].name) == 0)
-					{
-						playerPresent = 1;
-						indexPlayer = i;
-						break;
-					}
-				}
-
-				// Si il existe
-				if (playerPresent == 1) // Si present alors on re-saisi
-				{
-					printf("\nCe nom de joueur est deja present ! Merci de choisir un autre SVP !\n");
-				}
-				else // Si il existe pas
-				{
-					nbPlayer++; // on ajoute 1 au nombre de joueurs
-
-					Players * oldMem = (*Joueur); // On fait une copie de l'ancier
-					(*Joueur) = malloc(nbPlayer * sizeof(Players)); // On agrandi le tableau
-
-					if (oldMem != NULL)
-					{
-						memcpy((*Joueur), oldMem, (nbPlayer - 1) * sizeof(Players)); // On copie l'ancien dans le nouveau
-						free(oldMem); // on supprime l'ancien
-					}
-
-					strcpy((*Joueur)[nbPlayer - 1].name, nom); // On ajoute le nom du Joueur
-					(*Joueur)[nbPlayer - 1].numJoueur = nbPlayer; // Definis le num�ro du joueur
-					(*Joueur)[nbPlayer - 1].points = 0; // On lui met sont nombres de point a zero
-
-					printf("\nJoueur ajouter !\n");
-				}
+				joueurPresent = 1;
+			
+				break;
 			}
 		}
-		else
+
+		while (joueurPresent == 1) // Tant qu'il est déjà présent
 		{
-			printf("Rentrez un nom (Vous serez le joueur numero %d) : ", nbPlayer + 1);
+			printf("\n\nNom deja existant ! Veuillez en saisir un autre SVP ! : ");
 			scanf("%s", nom);
 
 			// ON VA VERIFER QUIL EXISTE OU PAS
-			int playerPresent = 0;
-			int indexPlayer = 0;
+			joueurPresent = 0;
 
-			for (int i = 0; i < nbPlayer; i++) // On parcour notre tableau de joueur
+			for (int j = 0; j < nbJoueurs; j++) // On parcour notre tableau de joueur
 			{
-				if (strcmp(nom, (*Joueur)[i].name) == 0)
+				if (strcmp(nom, *TabJoueurs) == 0)
 				{
-					playerPresent = 1;
-					indexPlayer = i;
+					joueurPresent = 1;
 					break;
 				}
 			}
-
-			// Si il existe
-			while (playerPresent == 1)
-			{
-				printf("\nCe nom de joueur est deja present ! Merci de choisir un autre SVP !\n");
-
-				printf("Rentrez un nom (Vous serez le joueur numero %d) : ", nbPlayer + 1);
-				scanf("%s", nom);
-
-				// ON VA VERIFER QUIL EXISTE OU PAS
-				playerPresent = 0;
-				indexPlayer = 0;
-
-				for (int i = 0; i < nbPlayer; i++) // On parcour notre tableau de joueur
-				{
-					if (strcmp(nom, (*Joueur)[i].name) == 0)
-					{
-						playerPresent = 1;
-						indexPlayer = i;
-						break;
-					}
-				}
-			}
-
-			// Si il existe pas
-			if (playerPresent == 0)
-			{
-				nbPlayer++; // on ajoute 1 au nombre de joueurs
-
-				Players * oldMem = (*Joueur); // On fait une copie de l'ancier
-				(*Joueur) = malloc(nbPlayer * sizeof(Players)); // On agrandi le tableau
-
-				if (oldMem != NULL)
-				{
-					memcpy((*Joueur), oldMem, (nbPlayer - 1) * sizeof(Players)); // On copie l'ancien dans le nouveau
-					free(oldMem); // on supprime l'ancien
-				}
-
-				strcpy((*Joueur)[nbPlayer - 1].name, nom); // On ajoute le nom du Joueur
-				(*Joueur)[nbPlayer - 1].numJoueur = nbPlayer; // Definis le num�ro du joueur
-				(*Joueur)[nbPlayer - 1].points = 0; // On lui met sont nombres de point a zero
-
-				printf("\nJoueur ajouter !\n");
-			}
 		}
 
-		if (nbPlayer != 6)
-		{
-			printf("Rajouter un joueur ? (Oui = 1 et Non = 0): "); // Si l'utilisateur souhaite rajouter un joueur
-			scanf("%d", &nbChoose);
-		}
-		else
-		{
-			printf("Bonne partie a vous tous ! (nombre de joueur max atteint)");
-			break;
-		}
-
-		while (nbChoose != 1 && nbChoose != 0) // Si l'utilisateur rentre pas 1 ou 0
-		{
-			if (nbPlayer != 6)
-			{
-			printf("Rajouter un joueur [1 ou 0 SVP !!!] ? (Oui = 1 et Non = 0): ");
-			scanf("%d", &nbChoose);
-			}
-			else
-			{
-				printf("Bonne partie a vous tous ! (nombre de joueur max atteint)");
-				break;
-			}
-		}
-
-		if (nbChoose == 1)
-		{
-			if (nbPlayer == 6) // Si le nombre de joueurs est déjà au max
-			{
-				printf("\nERREUR : Le nombre de joueurs maximum est 6 !");
-				break;
-			}
-		}
-		else if (nbChoose == 0) // Sinon on arrête la saisie de joueurs
-		{
-			break;
-		}
-
-	} while (nbPlayer < 6 || nbChoose != 0); // Tant que le nombre Joueur est pas au max et que
-
-	return nbPlayer;
+		strcpy(*TabJoueurs, nom);
+	}
 }
 
-void Jeu(Players ** Joueur, int nbJoueur)
+
+void Jeu(Joueurs ** TabJoueurs, int nbJoueurs)
 {
 	int winner = 0;
+
+	// Générer les scores de chaque joueur
 	srand(time(NULL));
 
-	do
-	{
-		// On fait jouer le joueur en affichant nom
-		for (int i = 0; i < nbJoueur; i++)
-		{
-			printf("\n\nTour en en cours : %s\n", (*Joueur)[i].name); // On affiche le nom du joueur
-			printf("Pour lancer les des appuyer sur la touche *\n");
+	int points = 0;
+	//int scoreFinalJoueur = 0;
 
-			while (_getch() != 42) // Tant qu'il a pas appuyer sur la touche *
-			{
-				printf("ERREUR : Veuillez appuyer sur la touche * SVP\n");
-			}
+	do {
+
+		for (int i = 0; i < nbJoueurs; i++)
+		{
+
+
+
 
 			int des[6]; // On fait un tableau pour stocker les valeurs des 6 dés 
 
-			printf("\nVotre tirage donne : ");
+			printf("\n %s, votre tirage donne : ", (*TabJoueurs)[i].nom);
 			for (int j = 0; j < 6; j++) // On tire les valeurs des 6 dés
 			{
 				des[j] = rand() % 6 + 1;  // Entre 1 et 6
 
 				printf("%d ", des[j]);
-			}
+				
+			}	
 
-			// On calcul alors les points du joueur en question
-			int score = calculPoints(&Joueur, des);
 
-			if (score == -1000) // Si il perd 1k points
+
+			int score = calculPoints(TabJoueurs, des);
+
+			if (score == -1000) // S'il perd 1000 points
 			{
 				// On va verifier qu'il n'est pas déjà à 0 points
-				if ((*Joueur)[i].points != 0)
+				if ((*TabJoueurs)[i].points != 0)
 				{
-					int result = (*Joueur)[i].points + score; // On fait la soustraction des 1k points
+					int result = (*TabJoueurs)[i].points + score; // On fait la soustraction des 1k points
 
 					if (result >= 0)
 					{
-						(*Joueur)[i].points -= 1000;
+						(*TabJoueurs)[i].points -= 1000;
 					}
-					else 
+					else
 					{
-						(*Joueur)[i].points = 0;
+						(*TabJoueurs)[i].points = 0;
 					}
 				}
 			}
 			else
 			{
-				(*Joueur)[i].points += score; // On lui met sont nombres de points
+				(*TabJoueurs)[i].points += score; // On lui met son nombre de points
 			}
 
-			if (score == 1) // Si un joueur à gagner
+			if (score == 1) // Si un joueur a gagné
 			{
 				winner = 1;
-				(*Joueur)[i].points += 99999; // Son score sera égal à l'infini (99999)
+				(*TabJoueurs)[i].points += 99999; // Son score sera égal à l'infini (99999)
 
-				printf("Vous avez gagner !!!");
+				printf("Vous avez gagné !");
 				break;
 			}
-			else if ((*Joueur)[i].points >= 10000) // Si score supérieur ou égale à 10k pooints 
+			else if ((*TabJoueurs)[i].points >= 10000) // Si score est supérieur ou égal à 10 000 pooints 
 			{
 				winner = 1;
-				printf("\nVotre score est sur ce tour est : %d points", score);
+				printf("\n Sur ce tour, votre score est de : %d points", score);
 			}
 			else
 			{
 				if (score == -1000)
 				{
-					printf("\nVotre score est sur ce tour est : 0 point (Vous perdez 1000 points mais votre score ne peut pas etre inferieur a 0 !)");
+					printf("\n Sur ce tour, votre score est de : 0 point (Vous perdez 1000 points mais votre score ne peut pas etre inferieur a 0 !)");
 				}
 				else
 				{
-					printf("\nVotre score est sur ce tour est : %d points", score);
+					printf("\n Sur ce tour, votre score est de : %d points", score);
 				}
 			}
+		
+				/*scoreFinalJoueur += (*TabJoueurs)[i].points;
+				printf("\n %s, votre nouveau score est : %d\n\n", (*TabJoueurs)[i].nom, scoreFinalJoueur);
+				*/
 		}
-
-		// Affichage des scores à la fin du tour
-		affichageScore(*Joueur, nbJoueur, winner);
-
+		
+		
+		
 	} while (winner != 1);
+	// (scoreFinalJoueur< 10000);
 }
 
-int calculPoints(Players ** Joueur, int * tab)
+int calculPoints(Joueurs * TabJoueurs, int * tabJeu)
 {
-	// On va faire chaque combinaison de points une par une
-	// et la comparer avec chaque valeur obtenue
-	// afin de calculer le score du joueur.
+
+	// Dans cette partie, nous allons identifier les différentes combinaisons
+	// et effectuer les calculs de points en fonction de ces combinaisons
+	// pour ensuite attribuer les scores à chaque joueur.
+
+
 
 	int scoreJoueur = 0;
 
-	// On va faire un tableau de 6 cases (num 1 à 6 du dé)
-	// Quand un chiffre est trouvé il va être additionné pour les combinaisons
-	int numDes[6] = { 0,0,0,0,0,0 };
+	// On crée un tableau de 6 cases
+	// Il va nous permettre de déterminer les fois où un dé se répète
+	// Dès qu'un chiffre apparaît, il est additionné au tableau
 
-	for (int i = 0; i < 6; i++) // On va partir les valeurs et comparer
+	int tabDes[6] = { 0,0,0,0,0,0 }; 
+
+	for (int i = 0; i < 6; i++)
 	{
-		// On va faire dans les cas ou on à 1 chiffres afin de stocker et faire avec le score
-		if (tab[i] == 1)
+		if (tabJeu[i] == 1) //Si un dé est égale à 1
 		{
-			numDes[0] += 1; // On ajoute 1 au tableau colonne 1
-			scoreJoueur += 100;
+			tabDes[0] += 1; // On ajoute 1 à la 1ère case du tableau des dès
+			scoreJoueur += 100; // On augmente le score de 100 car il y a un dé de valeur 1
 		}
-		else if (tab[i] == 2)
+		else if (tabJeu[i] == 2)
 		{
-			numDes[1] += 2; // On ajoute 2 au tableau colonne 2
+			tabDes[1] += 2; // On ajoute 2 à la 2ème case du tableau des dès
 		}
-		else if (tab[i] == 3)
+		else if (tabJeu[i] == 3)
 		{
-			numDes[2] += 3; // On ajoute 3 au tableau colonne 3
+			tabDes[2] = 3; // On ajoute 3 à la 3ème case du tableau des dès
 		}
-		else if (tab[i] == 4)
+		else if (tabJeu[i] == 4)
 		{
-			numDes[3] += 4; // On ajoute 4 au tableau colonne 4
+			tabDes[3] += 4; // On ajoute 4 à la 4ème case du tableau des dès
 		}
-		else if (tab[i] == 5) // Si dé = 5
+		else if (tabJeu[i] == 5)
 		{
-			numDes[4] += 5; // On ajoute 5 au tableau colonne 5
-			scoreJoueur += 50;
+			tabDes[4] += 5; // On ajoute 5 à la 5ème case du tableau des dès
+			scoreJoueur += 50; // On augmente le score de 50 car il y a un dé de valeur 5
 		}
-		else if (tab[i] == 6)
+		else if (tabJeu[i] == 6)
 		{
-			numDes[5] += 6; // On ajoute 6 au tableau colonne 6
+			tabDes[5] += 6; // On ajoute 6 à la 6ème case du tableau des dès
 		}
 	}
 
-	/// Pour Les combinaisons identiques 6 fois
-	if (numDes[0] == 6) // Si 6 dés sont égales à 1 (1+1+1+1+1+1)
+	// On s'intéresse ici à la combinaison : 6 dès identiques
+	if (tabDes[0] == 6) // Si le joueur obtient la combinaison gagnante : six 1 
 	{
-		scoreJoueur = 1; // Win
+		scoreJoueur = 1; // Victoire !
 	}
-	else if (numDes[1] == 12 || numDes[2] == 18 || numDes[3] == 24 || numDes[4] == 30 || numDes[5] == 36) // Si 6 dés sont égales identiques (n+n+n+n+n+n)
+	else if (tabDes[1] == 12 || tabDes[2] == 18 || tabDes[3] == 24 || tabDes[4] == 30 || tabDes[5] == 36)
 	{
-		scoreJoueur += 1000 * tab[0]; // 1000 fois la valeur du dé
+		scoreJoueur += 1000 * tabJeu[0]; // 1000 fois la valeur du dé
 	}
 
-	for (int i = 0; i < 6; i++) // on re parcour le tableau des valeurs du dés après Les combinaisons identiques 6 fois
+
+	for (int i = 0; i < 6; i++)
 	{
-		/// Pour Les combinaisons identiques 3 fois
-		if (tab[i] == 1 && numDes[0] == 3 || numDes[0] == 4 || numDes[0] == 5) // Si 3 ou plus de dés sont égales à 1 (1+1+1+1+1 max)
+		// On s'intéresse à la combinaison : 3 dès identiques (minimum)
+		
+		if (tabJeu[i] == 1 && tabDes[0] == 3 || tabDes[0] == 4 || tabDes[0] == 5)
 		{
-			scoreJoueur += 1000; // 1000 points
-			numDes[0] = 0; // On met à 0 pour par qui retombe dessus
+			scoreJoueur += 1000;
+			tabDes[0] = 0; // on réinitialise à 0 afin que le compilateur ne reprenne pas en compte ce qu'il a calculé précédemment
 		}
-		else // Si 3 dés identiques (n+n+n+n+n max)
+		else
 		{
-			if (tab[i] == 2 && numDes[1] == 6 || numDes[1] == 8 || numDes[1] == 10) // Si ma valeur de dés est x et qu'on l'a déjà eu trois fois ou plus
+			if (tabJeu[i] == 2 && tabDes[1] == 6 || tabDes[1] == 8 || tabDes[1] == 10)
 			{
-				scoreJoueur += 100 * tab[i]; // 100 fois la valeur du dé
-				numDes[1] = 0; // On met à 0 pour par qui retombe dessus
+				scoreJoueur += 100 * tabJeu[i]; // 100 fois la valeur du dé
+				tabDes[1] = 0; // on réinitialise à 0 afin que le compilateur ne reprenne pas en compte ce qu'il a calculé précédemment
 			}
-			else if (tab[i] == 3 && numDes[2] == 9 || numDes[2] == 12 || numDes[2] == 15)
+			else if (tabJeu[i] == 3 && tabJeu[2] == 9 || tabDes[2] == 12 || tabDes[2] == 15)
 			{
-				scoreJoueur += 100 * tab[i]; 
-				numDes[2] = 0;
+				scoreJoueur += 100 * tabJeu[i];
+				tabDes[2] = 0;
 			}
-			else if (tab[i] == 4 && numDes[3] == 12 || numDes[3] == 16 || numDes[3] == 20)
+			else if (tabJeu[i] == 4 && tabDes[3] == 12 || tabDes[3] == 16 || tabDes[3] == 20)
 			{
-				scoreJoueur += 100 * tab[i];
-				numDes[3] = 0;
+				scoreJoueur += 100 * tabJeu[i];
+				tabDes[3] = 0;
 			}
-			else if (tab[i] == 5 && numDes[4] == 15 || numDes[4] == 20 || numDes[4] == 25)
+			else if (tabJeu[i] == 5 && tabDes[4] == 15 || tabDes[4] == 20 || tabDes[4] == 25)
 			{
-				scoreJoueur += 100 * tab[i];
-				numDes[4] = 0;
+				scoreJoueur += 100 * tabJeu[i];
+				tabDes[4] = 0;
 			}
-			else if (tab[i] == 6 && numDes[5] == 18 || numDes[5] == 24 || numDes[5] == 30)
+			else if (tabJeu[i] == 6 && tabDes[2] == 18 || tabDes[2] == 24 || tabDes[2] == 30)
 			{
-				scoreJoueur += 100 * tab[i];
-				numDes[5] = 0;
-			}
+				scoreJoueur += 100 * tabJeu[i];
+				tabDes[5] = 0;
+		
+	        }
+			
 		}
+		
 	}
 
-	if (scoreJoueur == 0) // Si il a aucune combinaison ou aucun point, il perd 1k points
+	if (scoreJoueur == 0) // Si le joueur n'obtient aucune combinaison ou aucun point, il perd 1000 points
 	{
-		scoreJoueur = -1000;
+		scoreJoueur -= 1000;
 	}
 
-	return scoreJoueur; // Retourner le score du joueur
+	return scoreJoueur; // Le compilateur renvoie le score du joueur
 }
 
-void affichageScore(Players * Joueurs, int nbJoueurs, int winner)
-{
+
+
+void AffichageScore(Joueurs * TabJoueurs, int nbJoueurs, int winner)
+{    
+
 	if (winner == 1) // Si il y a un gagnant
 	{
 		int scoreWinner = 0, indexWinner = 0; // Pour trier le tableau des scores dans l'ordre croissant
-		int *finalScores; // pointeur pour allocation dynamique
-		finalScores = malloc(nbJoueurs * sizeof(int)); // On créer un tableau d'une taille du nombres de joueurs
+		int *finalScores; // Pointeur pour allocation dynamique
+		finalScores = malloc(nbJoueurs * sizeof(int)); // On crée un tableau d'une taille égale au nombre de joueurs
 
-		for (int j = 0; j < nbJoueurs ; j++) // Pour avoir le numéro du joueur ayant le plus de point donc le gagnant
+		for (int j = 0; j < nbJoueurs; j++) // Pour avoir le numéro du joueur ayant le plus de point donc le gagnant
 		{
-			if (Joueurs[j].points > scoreWinner) // On cherche le score max et à son index
+			if (TabJoueurs[j].points > scoreWinner) // On cherche le score max et son index
 			{
-				scoreWinner = Joueurs[j].points;
+				scoreWinner = TabJoueurs[j].points;
 				indexWinner = j;
 			}
 		}
 
-		// Ensuite on n'annonce le nom du gagnant avec son nombre de points
-		printf("\n\nLe gagnant de la partie est %s avec un total : %d points !!!\n", Joueurs[indexWinner].name, Joueurs[indexWinner].points);
+		// Ensuite on annonce le nom du gagnant avec son nombre de points
+		printf("\n\nLe gagnant de la partie est %s avec un total : %d points !!!\n", TabJoueurs[indexWinner].points, TabJoueurs[indexWinner].points);
 
 		// Et on affiche le classement final
 		for (int i = 0; i < nbJoueurs; i++)
 		{
-			printf("\n%s -> Score : %d\n", Joueurs[i].name, Joueurs[i].points);
+			printf("\n%s -> Score : %d\n", TabJoueurs[i].nom, TabJoueurs[i].points);
 		}
-		
+
 	}
 	else
 	{
 		printf("\n\nVoici les scores actuel :\n");
 		for (int i = 0; i < nbJoueurs; i++)
 		{
-			printf("\n%s -> Score : %d\n", Joueurs[i].name, Joueurs[i].points);
+			printf("\n%s -> Score : %d\n", TabJoueurs[i].nom, TabJoueurs[i].points);
 		}
 	}
 }
-
-///////////// BY POLLET Quentin ///////////
-//////////// Student at La Providence in Amiens (France)/////////
-//////////// Last Release Date : 17/12/2022 - 12:22 AM /////////
